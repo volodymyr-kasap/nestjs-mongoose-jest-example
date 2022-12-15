@@ -1,0 +1,66 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "tsconfig.json",
+    "sourceType": "module"
+  },
+  "plugins": [
+    "@typescript-eslint/eslint-plugin",
+    "unicorn",
+    "import",
+    "@typescript-eslint"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/recommended",
+    "plugin:import/typescript",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:unicorn/recommended"
+  ],
+  "root": true,
+  "env": {
+    "node": true,
+    "jest": true
+  },
+  "ignorePatterns": [".eslintrc.json"],
+  "rules": {
+    "indent": [2, 2, { "SwitchCase": 1, "ignoredNodes": ["PropertyDefinition"] }],
+    "quotes": [2, "single"],
+    "semi": "off",
+    "curly": [2, "all"],
+    "no-trailing-spaces": 2,
+    "no-multi-spaces": 2,
+    "eol-last": [2, "always"],
+    "arrow-parens": [2, "always"],
+    "no-multiple-empty-lines": [2, { "max": 2, "maxEOF": 1, "maxBOF": 0 }],
+    "quote-props": [2, "as-needed"],
+    "object-curly-spacing": [2, "always"],
+    "comma-dangle": [2, "always-multiline"],
+    "comma-spacing": [2, { "before": false, "after": true }],
+    "import/order": [2, { "newlines-between": "always" }],
+    "import/no-unresolved": "off",
+    "import/newline-after-import": [2, { "count": 2 }],
+    "@typescript-eslint/semi" : [2, "always"],
+    "@typescript-eslint/lines-between-class-members": [2, "always"],
+    "@typescript-eslint/space-before-function-paren": [2, "always"],
+    "@typescript-eslint/member-delimiter-style": 2,
+    "@typescript-eslint/no-empty-interface": "off",
+    "unicorn/import-style": [
+      "error",
+      {
+        "styles": {
+          "util": false,
+          "path": {
+            "named": true
+          }
+        }
+      }
+    ],
+    "unicorn/prefer-top-level-await": "off",
+    "unicorn/no-null": "off",
+    "unicorn/no-array-callback-reference": "off",
+    "unicorn/prevent-abbreviations": "off",
+    "@typescript-eslint/ban-types": "off"
+  }
+}
