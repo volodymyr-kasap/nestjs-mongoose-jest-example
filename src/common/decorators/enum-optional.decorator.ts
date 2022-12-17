@@ -2,7 +2,7 @@ import { ApiPropertyOptional, ApiPropertyOptions } from '@nestjs/swagger';
 import { applyDecorators } from '@nestjs/common';
 import { IsEnum, IsOptional } from 'class-validator';
 
-import { ToEnumOptional } from '$/common/decorators/class-validator';
+import { ToEnumOptional } from '$/common/decorators/class-transformer';
 
 
 export function EnumOptional (

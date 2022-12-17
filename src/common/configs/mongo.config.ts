@@ -6,8 +6,11 @@ export const getMongoConfig = (): MongooseModuleAsyncOptions => {
   return {
     inject: [ConfigService],
     imports: [ConfigModule],
-    useFactory: (configService: ConfigService) => ({
-      uri: configService.getOrThrow('MONGO_URL'),
-    }),
+    useFactory: (configService: ConfigService) => {
+      const uri = configService.getOrThrow('MONGO_URL');
+      return {
+        uri,
+      };
+    },
   };
 };

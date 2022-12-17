@@ -39,6 +39,7 @@ function setupPipes (app: INestApplication) {
       forbidUnknownValues: true,
       forbidNonWhitelisted: true,
       whitelist: true,
+      enableDebugMessages: true,
     }),
   );
 }

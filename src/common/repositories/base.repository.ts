@@ -5,15 +5,15 @@ export abstract class BaseMongoRepository<T extends Document> {
   protected constructor (protected readonly entityModel: Model<T>) {}
 
   async findOneById (_id: string): Promise<T | null> {
-    return this.entityModel.findOne({ _id }).exec();
+    return this.entityModel.findById(_id).exec();
   }
 
   async findOneBy (entityFilterQuery: FilterQuery<T>): Promise<T | null> {
     return this.entityModel.findOne(entityFilterQuery).exec();
   }
 
-  async find (entityFilterQuery: FilterQuery<T>): Promise<T[] | null> {
-    return this.entityModel.find(entityFilterQuery);
+  async find (entityFilterQuery: FilterQuery<T>): Promise<T[]> {
+    return this.entityModel.find(entityFilterQuery).exec();
   }
 
   async create (createEntityData: unknown): Promise<T> {

@@ -56,5 +56,5 @@ export class PaginatePageRequestDto implements PaginatePageFilterInterface {
     enumName: 'SortOrderEnum',
     default: SortOrderEnum.DESC,
   })
-  orderBy: SortOrderEnum = SortOrderEnum.DESC;
+  sortBy: SortOrderEnum = SortOrderEnum.DESC;
 }

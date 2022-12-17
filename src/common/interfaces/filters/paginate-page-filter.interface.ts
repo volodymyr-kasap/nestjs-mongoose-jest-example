@@ -1,3 +1,6 @@
+import { SortOrderEnum } from '$/common/enums';
+
+
 export interface PaginatePageFilterInterface {
   search: string;
   page: number;
@@ -5,4 +8,5 @@ export interface PaginatePageFilterInterface {
   dateTo: Date;
   take: number;
   skip: number;
+  sortBy: SortOrderEnum;
 }
