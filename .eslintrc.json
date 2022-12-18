@@ -61,6 +61,7 @@
     "unicorn/no-null": "off",
     "unicorn/no-array-callback-reference": "off",
     "unicorn/prevent-abbreviations": "off",
-    "@typescript-eslint/ban-types": "off"
+    "@typescript-eslint/ban-types": "off",
+    "@typescript-eslint/no-namespace": "off"
   }
 }

@@ -1,12 +1,10 @@
-import { IsBoolean, IsOptional } from 'class-validator';
+import { IsBoolean } from 'class-validator';
 
 
 export class TrackingSearchSettingsRequestDto {
   @IsBoolean()
-  @IsOptional()
   inChannels: boolean;
 
   @IsBoolean()
-  @IsOptional()
   inChats: boolean;
 }

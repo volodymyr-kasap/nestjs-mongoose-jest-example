@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put, Query } from '@nestjs/common';
 import { ApiNoContentResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 import { PageDto } from '$/common/dto/pages';
@@ -64,6 +64,7 @@ export class TrackingController {
   @Delete(':id')
   @ApiOperation({ summary: 'Delete' })
   @ApiNoContentResponse()
+  @HttpCode(HttpStatus.NO_CONTENT)
   async delete (
     @Param('id', ParseObjectIdPipe) id: string,
   ): Promise<void> {

@@ -14,6 +14,7 @@ export class TrackingModel extends Document implements ITracking {
   @Prop({
     required: true,
     unique: true,
+    maxlength: 128,
   })
   search: string;
 

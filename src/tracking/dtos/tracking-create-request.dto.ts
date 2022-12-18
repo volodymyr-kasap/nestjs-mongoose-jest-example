@@ -1,4 +1,4 @@
-import { IsDefined, IsNotEmpty, IsString, ValidateNested } from 'class-validator';
+import { IsDefined, IsNotEmpty, IsString, MaxLength, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 
 import { TrackingSearchSettingsRequestDto } from './tracking-search-settings-request.dto';
@@ -10,6 +10,7 @@ export class TrackingCreateRequestDto {
   @IsString()
   @IsNotEmpty()
   @TrimString()
+  @MaxLength(128)
   search: string;
 
   @IsDefined()
