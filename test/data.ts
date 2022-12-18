@@ -1,4 +1,4 @@
-import { TrackingCreateRequestDto } from '$/tracking/dtos';
+import { TrackingCreateRequestDto, TrackingUpdateRequestDto } from '$/tracking/dtos';
 
 
 export namespace Tracking {
@@ -61,5 +61,13 @@ export namespace Tracking {
   };
 
   export const notFoundObjectId = '507f1f77bcf86cd799439011';
+
   export const unvalidObjectId = '1';
+
+  export const validUpdateRequest: TrackingUpdateRequestDto = {
+    searchSettings: {
+      inChannels: true,
+      inChats: true,
+    },
+  };
 }

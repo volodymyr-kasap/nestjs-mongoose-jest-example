@@ -13,7 +13,7 @@ import { TrackingStatusEnum } from '$/common/enums';
 describe('TrackingController (e2e)', () => {
   let app: INestApplication;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const testingModule = await moduleFixture;
     app = testingModule.createNestApplication();
     app.useGlobalPipes(
@@ -138,31 +138,36 @@ describe('TrackingController (e2e)', () => {
   });
 
   describe('/tracking/:id (GET) Get tracking', () => {
-    it('Get one success', async () => {
+    let createdId;
+
+    beforeAll(async () => {
       const { body: { _id } } = await request(app.getHttpServer())
         .post('/tracking')
         .send(Tracking.validCreateRequest)
         .expect(HttpStatus.CREATED);
+      createdId = _id;
+    });
 
-      console.log(_id);
+    afterAll(async () => {
+      await request(app.getHttpServer())
+        .delete('/tracking/' + createdId)
+        .expect(HttpStatus.NO_CONTENT);
+    });
 
+    it('Get one success', async () => {
       const response = await request(app.getHttpServer())
-        .get('/tracking/' + _id)
+        .get('/tracking/' + createdId)
         .expect(HttpStatus.OK);
 
       const body: TrackingResponseDto = response.body;
 
       expect(body._id).toBeDefined();
-      expect(body._id === _id).toBeTruthy();
+      expect(body._id === createdId).toBeTruthy();
       expect(Object.values(TrackingStatusEnum).includes(body.status)).toBeTruthy();
       expect(body.searchSettings).toBeDefined();
       expect(body.searchSettings.inChats).toBeDefined();
       expect(body.searchSettings.inChannels).toBeDefined();
       expect(body.createdAt).toBeDefined();
-
-      await request(app.getHttpServer())
-        .delete('/tracking/' + _id)
-        .expect(HttpStatus.NO_CONTENT);
     });
 
     it('Get one unvalid id', () => {
@@ -178,13 +183,54 @@ describe('TrackingController (e2e)', () => {
     });
   });
 
-  // describe('/tracking/:id (PUT) Update tracking', () => {
-  //   it('Get one unvalid id', () => {
-  //     return request(app.getHttpServer())
-  //       .get('/' + unvalidObjectId)
-  //       .expect(HttpStatus.BAD_REQUEST);
-  //   });
-  // });
+  describe('/tracking/:id (PUT) Update tracking', () => {
+    let createdId;
+
+    beforeAll(async () => {
+      const { body: { _id } } = await request(app.getHttpServer())
+        .post('/tracking')
+        .send(Tracking.validCreateRequest)
+        .expect(HttpStatus.CREATED);
+      createdId = _id;
+    });
+
+    afterAll(async () => {
+      await request(app.getHttpServer())
+        .delete('/tracking/' + createdId)
+        .expect(HttpStatus.NO_CONTENT);
+    });
+
+    it('Update tracking success', async () => {
+      const response = await request(app.getHttpServer())
+        .put('/tracking/' + createdId)
+        .send(Tracking.validUpdateRequest)
+        .expect(HttpStatus.OK);
+
+      const body: TrackingResponseDto = response.body;
+
+      expect(body._id).toBeDefined();
+      expect(body._id === createdId).toBeTruthy();
+      expect(Object.values(TrackingStatusEnum).includes(body.status)).toBeTruthy();
+      expect(body.searchSettings).toBeDefined();
+      expect(body.searchSettings.inChats).toBeDefined();
+      expect(body.searchSettings.inChannels).toBeDefined();
+      expect(body.createdAt).toBeDefined();
+    });
+
+    it('Update tracking notFound', async () => {
+      await request(app.getHttpServer())
+        .put('/tracking/' + Tracking.notFoundObjectId)
+        .send(Tracking.validUpdateRequest)
+        .expect(HttpStatus.BAD_REQUEST);
+    });
+
+    it('Update tracking emptyBody', async () => {
+      await request(app.getHttpServer())
+        .put('/tracking/' + createdId)
+        .send(Tracking.emptyCreateRequest)
+        .expect(HttpStatus.BAD_REQUEST);
+    });
+  });
 
 });
 

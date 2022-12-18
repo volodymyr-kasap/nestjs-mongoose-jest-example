@@ -8,6 +8,7 @@ import {
 import { TrackingController } from '$/tracking/controllers';
 import { TrackingService } from '$/tracking/services';
 import { TrackingRepository } from '$/tracking/repositories';
+import { TrackingSeed } from '$/tracking/seeds';
 
 
 @Module({
@@ -23,6 +24,7 @@ import { TrackingRepository } from '$/tracking/repositories';
   providers: [
     TrackingRepository,
     TrackingService,
+    TrackingSeed,
   ],
 })
 export class TrackingModule {}
